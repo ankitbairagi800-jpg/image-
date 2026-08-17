@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Perfumery | Premium Agarbatti & Incense Products</title>
-    <meta name="description" content="Explore Aditya Perfumery's range of quality agarbatti and fragrance products. Contact us for product enquiries, wholesale and bulk orders.">
+    <title>Aditya Perfumary | Premium Agarbatti & Incense Products</title>
+    <meta name="description" content="Explore Aditya Perfumary's range of quality agarbatti and fragrance products. Contact us for product enquiries, wholesale and bulk orders.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,11 +98,11 @@
         const { useState, useEffect } = React;
         // --- COMPANY DATA ---
         const COMPANY_INFO = {
-            name: "ADITYA PERFUMERY",
+            name: "ADITYA PERFUMARY",
             address: "Malegaon, Akola, Maharashtra – 444108, India",
             phone: "9881646082",
             phoneFormatted: "+91 988 164 6082",
-            whatsappMsg: "Hello Aditya Perfumery, I am interested in your agarbatti products. Please share your product catalogue and wholesale details."
+            whatsappMsg: "Hello Aditya Perfumary, I am interested in your agarbatti products. Please share your product catalogue and wholesale details."
         };
         const WHATSAPP_LINK = `https://wa.me/91${COMPANY_INFO.phone}?text=${encodeURIComponent(COMPANY_INFO.whatsappMsg)}`;
         // --- PRODUCT DATA (REPLACE WITH DRIVE ASSETS) ---
@@ -412,7 +412,7 @@
                             onClick={() => handleNav('home')}
                         >
                             <span className="font-heading font-bold text-2xl md:text-3xl text-brand-maroon tracking-wider">ADITYA</span>
-                            <span className="font-body text-xs md:text-sm tracking-[0.3em] text-brand-charcoal">PERFUMERY</span>
+                            <span className="font-body text-xs md:text-sm tracking-[0.3em] text-brand-charcoal">PERFUMARY</span>
                         </div>
                         {/* Desktop Nav */}
                         <div className="hidden md:flex items-center space-x-8">
@@ -503,7 +503,7 @@
                     <div className="flex flex-col md:flex-row items-center gap-16">
                         <div className="w-full md:w-1/2 relative fade-in">
                             <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-premium">
-                                <img src="natural_ingredients.jpg" alt="Aditya Perfumery Tradition" className="w-full h-full object-cover" />
+                                <img src="about_woman.png" alt="Aditya Perfumary Tradition" className="w-full h-full object-cover" />
                             </div>
                             <div className="absolute -bottom-10 -right-10 bg-brand-maroon text-brand-ivory p-8 rounded-xl shadow-xl hidden md:block">
                                 <h4 className="font-heading text-4xl mb-2">1986</h4>
@@ -576,12 +576,12 @@
                 </div>
             </div>
         );
-        const ProductSection = ({ onViewProduct }) => {
+        const ProductSection = ({ onViewProduct, products }) => {
             const [filter, setFilter] = useState('All');
-            const categories = ['All', ...new Set(PRODUCT_DATA.map(p => p.type))];
+            const categories = ['All', ...new Set(products.map(p => p.type))];
             const filteredProducts = filter === 'All' 
-                ? PRODUCT_DATA 
-                : PRODUCT_DATA.filter(p => p.type === filter);
+                ? products 
+                : products.filter(p => p.type === filter);
             return (
                 <section className="py-24 bg-brand-ivory" id="products">
                     <div className="container mx-auto px-4">
@@ -687,7 +687,7 @@
                                     <Button 
                                         variant="whatsapp" 
                                         className="w-full py-4 text-lg"
-                                        href={`https://wa.me/91${COMPANY_INFO.phone}?text=Hello Aditya Perfumery, I want to enquire about ${encodeURIComponent(product.name)}.`}
+                                        href={`https://wa.me/91${COMPANY_INFO.phone}?text=Hello Aditya Perfumary, I want to enquire about ${encodeURIComponent(product.name)}.`}
                                     >
                                         <Icons.WhatsApp /> Enquire via WhatsApp
                                     </Button>
@@ -713,7 +713,7 @@
                     <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdib3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNHYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMC0zMFYwaC0ydjRoLTR2Mmg0djRoMnYtNGg0VjRoLTR6TTYgMzR2LTRIMHY0aC00djJoNHY0aDJ2LTRoNHYtMkY2em0wLTMwVjBIMHY0aC00djJoNHY0aDJ2LTRoNFY0SDZ6IiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L2c+PC9zdmc+')] opacity-20"></div>
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="text-center mb-16 fade-in">
-                            <h2 className="font-heading text-4xl md:text-5xl text-brand-gold mb-4">Why Choose Aditya Perfumery</h2>
+                            <h2 className="font-heading text-4xl md:text-5xl text-brand-gold mb-4">Why Choose Aditya Perfumary</h2>
                             <p className="max-w-2xl mx-auto text-brand-ivory/80">Experience the difference of a brand built on trust, devotion, and quality.</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -746,7 +746,7 @@
                             <span className="text-brand-maroon font-bold tracking-widest uppercase text-sm mb-2 block">Partner Network</span>
                             <h2 className="font-heading text-3xl md:text-5xl text-brand-charcoal mb-6">Bulk & Wholesale Orders</h2>
                             <p className="text-brand-gray mb-6 leading-relaxed">
-                                Aditya Perfumery is equipped to handle large-scale supply requirements for distributors, retailers, and bulk buyers across India. We offer competitive pricing, consistent quality, and reliable packaging for all our business partners.
+                                Aditya Perfumary is equipped to handle large-scale supply requirements for distributors, retailers, and bulk buyers across India. We offer competitive pricing, consistent quality, and reliable packaging for all our business partners.
                             </p>
                             <ul className="space-y-3 mb-8">
                                 <li className="flex items-center gap-3 text-brand-charcoal font-medium">
@@ -811,7 +811,7 @@
                         <div className="md:col-span-2">
                             <div className="mb-6">
                                 <span className="font-heading font-bold text-3xl text-white tracking-wider block">ADITYA</span>
-                                <span className="font-body text-sm tracking-[0.3em] text-brand-gold">PERFUMERY</span>
+                                <span className="font-body text-sm tracking-[0.3em] text-brand-gold">PERFUMARY</span>
                             </div>
                             <p className="text-brand-ivory/70 max-w-sm text-sm leading-relaxed mb-6">
                                 Premium Indian agarbatti and fragrance products crafted with devotion, purity, and unmatched quality. Based in Malegaon, Akola.
@@ -825,6 +825,7 @@
                                 <li><button onClick={() => navigate('products')} className="hover:text-brand-gold transition-colors">Our Products</button></li>
                                 <li><button onClick={() => navigate('wholesale')} className="hover:text-brand-gold transition-colors">Wholesale Orders</button></li>
                                 <li><button onClick={() => navigate('contact')} className="hover:text-brand-gold transition-colors">Contact Us</button></li>
+                                <li className="pt-2 border-t border-white/5"><button onClick={() => navigate('admin-login')} className="hover:text-brand-gold text-xs opacity-60 transition-colors">Admin Login</button></li>
                             </ul>
                         </div>
                         <div>
@@ -854,11 +855,433 @@
                 </div>
             </footer>
         );
+
+        // --- ADMIN LOGIN & DASHBOARD ---
+        const AdminLogin = ({ onLogin, onCancel }) => {
+            const [username, setUsername] = useState('');
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (username === 'ADITYA' && password === 'jayant@123') {
+                    onLogin();
+                } else {
+                    setError('Invalid Username or Password');
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-brand-ivory flex items-center justify-center pt-24 pb-12 px-4">
+                    <div className="w-full max-w-md bg-white rounded-3xl shadow-premium border border-brand-gold/20 p-8">
+                        <div className="text-center mb-8">
+                            <h2 className="font-heading text-3xl text-brand-maroon font-bold">Admin Login</h2>
+                            <p className="text-brand-gray text-sm">Access the Aditya Perfumary control panel</p>
+                        </div>
+                        {error && (
+                            <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg border border-red-200 mb-6 font-medium text-center">
+                                {error}
+                            </div>
+                        )}
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label className="block text-sm font-semibold text-brand-charcoal mb-2">Username</label>
+                                <input 
+                                    type="text" 
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none transition-colors text-sm"
+                                    required
+                                    placeholder="Enter username"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-brand-charcoal mb-2">Password</label>
+                                <input 
+                                    type="password" 
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none transition-colors text-sm"
+                                    required
+                                    placeholder="Enter password"
+                                />
+                            </div>
+                            <div className="flex gap-4 pt-2">
+                                <button 
+                                    type="submit" 
+                                    className="w-full py-3 bg-brand-maroon text-brand-ivory rounded-full text-sm font-medium uppercase tracking-wider hover:bg-brand-maroonDark transition-colors shadow-md"
+                                >
+                                    Login
+                                </button>
+                                <button 
+                                    type="button" 
+                                    onClick={onCancel}
+                                    className="w-full py-3 border border-brand-maroon text-brand-maroon rounded-full text-sm font-medium uppercase tracking-wider hover:bg-brand-ivory transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            );
+        };
+
+        const AdminDashboard = ({ products, onSave, onLogout }) => {
+            const [activeTab, setActiveTab] = useState('list');
+            const [editingProduct, setEditingProduct] = useState(null);
+            
+            // Form states
+            const [name, setName] = useState('');
+            const [type, setType] = useState('Premium Incense Sticks');
+            const [description, setDescription] = useState('');
+            const [fragrance, setFragrance] = useState('');
+            const [image, setImage] = useState('');
+            const [galleryStr, setGalleryStr] = useState('');
+            const [packSizes, setPackSizes] = useState([{ weight: '', price: '' }]);
+
+            // Initialize form on edit
+            useEffect(() => {
+                if (editingProduct) {
+                    setName(editingProduct.name || '');
+                    setType(editingProduct.type || 'Premium Incense Sticks');
+                    setDescription(editingProduct.description || '');
+                    setFragrance(editingProduct.fragrance || '');
+                    setImage(editingProduct.image || '');
+                    setGalleryStr((editingProduct.gallery || []).join(', '));
+                    setPackSizes(editingProduct.packSizes && editingProduct.packSizes.length > 0 
+                        ? editingProduct.packSizes 
+                        : [{ weight: '', price: '' }]
+                    );
+                    setActiveTab('edit');
+                } else {
+                    resetForm();
+                }
+            }, [editingProduct]);
+
+            const resetForm = () => {
+                setName('');
+                setType('Premium Incense Sticks');
+                setDescription('');
+                setFragrance('');
+                setImage('');
+                setGalleryStr('');
+                setPackSizes([{ weight: '', price: '' }]);
+            };
+
+            const handleAddSizeRow = () => {
+                setPackSizes([...packSizes, { weight: '', price: '' }]);
+            };
+
+            const handleRemoveSizeRow = (idx) => {
+                setPackSizes(packSizes.filter((_, i) => i !== idx));
+            };
+
+            const handleSizeChange = (idx, field, value) => {
+                const newSizes = [...packSizes];
+                newSizes[idx][field] = value;
+                setPackSizes(newSizes);
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const filteredSizes = packSizes.filter(s => s.weight && s.price);
+                const galleryList = galleryStr ? galleryStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+                
+                const updatedProduct = {
+                    id: editingProduct ? editingProduct.id : Date.now(),
+                    name,
+                    type,
+                    description,
+                    fragrance,
+                    image: image || 'https://placehold.co/600x800/FAF7F2/6A1E36?text=Aditya+Perfumary',
+                    gallery: galleryList,
+                    packSizes: filteredSizes
+                };
+
+                let newProductsList;
+                if (editingProduct) {
+                    newProductsList = products.map(p => p.id === editingProduct.id ? updatedProduct : p);
+                    setEditingProduct(null);
+                } else {
+                    newProductsList = [...products, updatedProduct];
+                }
+
+                onSave(newProductsList);
+                resetForm();
+                setActiveTab('list');
+                alert(editingProduct ? 'Product updated successfully!' : 'Product added successfully!');
+            };
+
+            const handleDelete = (id, prodName) => {
+                if (confirm(`Are you sure you want to delete "${prodName}"?`)) {
+                    const newProductsList = products.filter(p => p.id !== id);
+                    onSave(newProductsList);
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-brand-ivory pt-28 pb-16">
+                    <div className="container mx-auto px-4 max-w-6xl">
+                        {/* Header */}
+                        <div className="bg-white rounded-2xl shadow-md border border-brand-gold/10 p-6 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h1 className="font-heading text-3xl text-brand-maroon font-bold">Admin Dashboard</h1>
+                                <p className="text-brand-gray text-sm">Welcome back, Aditya Perfumary Store Administrator</p>
+                            </div>
+                            <div className="flex gap-4">
+                                <button 
+                                    onClick={() => { resetForm(); setEditingProduct(null); setActiveTab(activeTab === 'list' ? 'add' : 'list'); }}
+                                    className="px-5 py-2.5 bg-brand-maroon text-brand-ivory rounded-full text-sm font-semibold hover:bg-brand-maroonDark transition-colors"
+                                >
+                                    {activeTab === 'list' ? '+ Add New Product' : 'View Products List'}
+                                </button>
+                                <button 
+                                    onClick={onLogout}
+                                    className="px-5 py-2.5 border border-brand-maroon text-brand-maroon rounded-full text-sm font-semibold hover:bg-brand-ivory transition-colors"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Tabs content */}
+                        {activeTab === 'list' ? (
+                            <div className="bg-white rounded-2xl shadow-md border border-brand-gold/10 overflow-hidden">
+                                <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+                                    <h3 className="font-heading font-semibold text-xl text-brand-charcoal">All Products ({products.length})</h3>
+                                    <button 
+                                        onClick={() => {
+                                            if (confirm("Do you want to reset the database to the original default catalog?")) {
+                                                localStorage.removeItem('aditya_products');
+                                                window.location.reload();
+                                            }
+                                        }}
+                                        className="text-xs text-red-600 hover:underline font-bold"
+                                    >
+                                        Reset to Default Catalog
+                                    </button>
+                                </div>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-left border-collapse text-sm">
+                                        <thead>
+                                            <tr className="bg-brand-ivory text-brand-charcoal font-semibold border-b border-gray-200">
+                                                <th className="p-4">Image</th>
+                                                <th className="p-4">Name</th>
+                                                <th className="p-4">Category</th>
+                                                <th className="p-4">Fragrance Note</th>
+                                                <th className="p-4">Sizes & Prices</th>
+                                                <th className="p-4 text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-gray-100">
+                                            {products.map(p => (
+                                                <tr key={p.id} className="hover:bg-brand-ivory/30 transition-colors">
+                                                    <td className="p-4">
+                                                        <div className="w-12 h-16 rounded overflow-hidden bg-gray-50 border border-gray-100 flex items-center justify-center p-1">
+                                                            <img src={p.image} alt={p.name} className="max-w-full max-h-full object-contain" />
+                                                        </div>
+                                                    </td>
+                                                    <td className="p-4 font-semibold text-brand-charcoal">{p.name}</td>
+                                                    <td className="p-4 text-brand-gray">{p.type}</td>
+                                                    <td className="p-4 text-brand-gold font-medium">{p.fragrance || 'N/A'}</td>
+                                                    <td className="p-4">
+                                                        <div className="space-y-1">
+                                                            {(p.packSizes || []).map((sz, idx) => (
+                                                                <div key={idx} className="text-xs">
+                                                                    <span className="font-semibold">{sz.weight}:</span> ₹{sz.price}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </td>
+                                                    <td className="p-4 text-right space-x-3">
+                                                        <button 
+                                                            onClick={() => setEditingProduct(p)}
+                                                            className="text-brand-gold hover:underline font-semibold"
+                                                        >
+                                                            Edit
+                                                        </button>
+                                                        <button 
+                                                            onClick={() => handleDelete(p.id, p.name)}
+                                                            className="text-red-600 hover:underline font-semibold"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="bg-white rounded-2xl shadow-md border border-brand-gold/10 p-8 max-w-3xl mx-auto">
+                                <h3 className="font-heading font-semibold text-2xl text-brand-maroon mb-6">
+                                    {activeTab === 'edit' ? 'Edit Product Details' : 'Add New Product'}
+                                </h3>
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Product Name</label>
+                                            <input 
+                                                type="text" 
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                required
+                                                placeholder="e.g. Loban Dhoop"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Category / Type</label>
+                                            <select 
+                                                value={type}
+                                                onChange={(e) => setType(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm bg-white"
+                                            >
+                                                <option value="Dhoop Sticks">Dhoop Sticks</option>
+                                                <option value="Premium Incense Sticks">Premium Incense Sticks</option>
+                                                <option value="Metallic Sticks Jar/Pack">Metallic Sticks Jar/Pack</option>
+                                                <option value="Sambrani Cups">Sambrani Cups</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Fragrance Note</label>
+                                            <input 
+                                                type="text" 
+                                                value={fragrance}
+                                                onChange={(e) => setFragrance(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                placeholder="e.g. Pure Loban, Sandal & Spice"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Primary Image Source (URL or Base64)</label>
+                                            <input 
+                                                type="text" 
+                                                value={image}
+                                                onChange={(e) => setImage(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                placeholder="Image filename or base64 data URL"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Description</label>
+                                        <textarea 
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            rows="3"
+                                            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                            placeholder="Write product description..."
+                                            required
+                                        ></textarea>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Gallery Image Names (Comma Separated)</label>
+                                        <input 
+                                            type="text" 
+                                            value={galleryStr}
+                                            onChange={(e) => setGalleryStr(e.target.value)}
+                                            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                            placeholder="e.g. catalog_page_3.jpg, catalog_page_4.jpg"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2 flex justify-between items-center">
+                                            <span>Pack Sizes & Prices</span>
+                                            <button 
+                                                type="button" 
+                                                onClick={handleAddSizeRow}
+                                                className="text-xs text-brand-maroon hover:underline font-bold"
+                                            >
+                                                + Add Size Row
+                                            </button>
+                                        </label>
+                                        <div className="space-y-3">
+                                            {packSizes.map((sz, idx) => (
+                                                <div key={idx} className="flex gap-4 items-center">
+                                                    <input 
+                                                        type="text" 
+                                                        value={sz.weight}
+                                                        onChange={(e) => handleSizeChange(idx, 'weight', e.target.value)}
+                                                        className="w-1/2 px-4 py-2 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                        placeholder="e.g. 100gm, 1 Jar"
+                                                        required
+                                                    />
+                                                    <input 
+                                                        type="text" 
+                                                        value={sz.price}
+                                                        onChange={(e) => handleSizeChange(idx, 'price', e.target.value)}
+                                                        className="w-1/2 px-4 py-2 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                        placeholder="e.g. 45.00"
+                                                        required
+                                                    />
+                                                    {packSizes.length > 1 && (
+                                                        <button 
+                                                            type="button" 
+                                                            onClick={() => handleRemoveSizeRow(idx)}
+                                                            className="text-red-500 hover:text-red-700 font-bold"
+                                                        >
+                                                            Remove
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="flex gap-4 pt-4 border-t border-gray-100">
+                                        <button 
+                                            type="submit"
+                                            className="px-6 py-3 bg-brand-maroon text-brand-ivory rounded-full text-sm font-semibold hover:bg-brand-maroonDark transition-colors shadow-md"
+                                        >
+                                            {activeTab === 'edit' ? 'Save Changes' : 'Create Product'}
+                                        </button>
+                                        <button 
+                                            type="button"
+                                            onClick={() => { setEditingProduct(null); setActiveTab('list'); }}
+                                            className="px-6 py-3 border border-gray-300 text-brand-charcoal rounded-full text-sm font-semibold hover:bg-gray-50 transition-colors"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
         const App = () => {
             const [currentView, setCurrentView] = useState('home');
             const [selectedProduct, setSelectedProduct] = useState(null);
             const [showCatalog, setShowCatalog] = useState(false);
             const [catalogPage, setCatalogPage] = useState(1);
+            
+            const [products, setProducts] = useState(() => {
+                const saved = localStorage.getItem('aditya_products');
+                if (saved) {
+                    try {
+                        return JSON.parse(saved);
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+                return PRODUCT_DATA;
+            });
+
+            const handleSaveProducts = (newList) => {
+                setProducts(newList);
+                localStorage.setItem('aditya_products', JSON.stringify(newList));
+            };
             
             const openCatalog = (page = 1) => {
                 setCatalogPage(page);
@@ -881,11 +1304,24 @@
                     <Navbar navigate={navigate} currentView={currentView} openCatalog={openCatalog} />
                     
                     <main>
+                        {currentView === 'admin-login' && (
+                            <AdminLogin 
+                                onLogin={() => navigate('admin-dashboard')} 
+                                onCancel={() => navigate('home')} 
+                            />
+                        )}
+                        {currentView === 'admin-dashboard' && (
+                            <AdminDashboard 
+                                products={products} 
+                                onSave={handleSaveProducts} 
+                                onLogout={() => navigate('home')} 
+                            />
+                        )}
                         {currentView === 'home' && (
                             <>
                                 <Hero navigate={navigate} openCatalog={openCatalog} />
                                 <AboutPreview navigate={navigate} />
-                                <ProductSection onViewProduct={viewProduct} />
+                                <ProductSection onViewProduct={viewProduct} products={products} />
                                 <WhyChooseUs />
                                 <WholesaleSection />
                                 <ContactSection />
@@ -925,7 +1361,7 @@
                         )}
                         {currentView === 'products' && (
                             <div className="pt-20">
-                                <ProductSection onViewProduct={viewProduct} />
+                                <ProductSection onViewProduct={viewProduct} products={products} />
                             </div>
                         )}
                         {currentView === 'wholesale' && (

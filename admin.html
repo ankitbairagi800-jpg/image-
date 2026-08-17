@@ -378,7 +378,7 @@
             const [description, setDescription] = useState('');
             const [fragrance, setFragrance] = useState('');
             const [image, setImage] = useState('');
-            const [galleryStr, setGalleryStr] = useState('');
+            const [gallery, setGallery] = useState([]);
             const [packSizes, setPackSizes] = useState([{ weight: '', price: '' }]);
 
             // Initialize form on edit
@@ -389,7 +389,7 @@
                     setDescription(editingProduct.description || '');
                     setFragrance(editingProduct.fragrance || '');
                     setImage(editingProduct.image || '');
-                    setGalleryStr((editingProduct.gallery || []).join(', '));
+                    setGallery(editingProduct.gallery || []);
                     setPackSizes(editingProduct.packSizes && editingProduct.packSizes.length > 0 
                         ? editingProduct.packSizes 
                         : [{ weight: '', price: '' }]
@@ -406,7 +406,7 @@
                 setDescription('');
                 setFragrance('');
                 setImage('');
-                setGalleryStr('');
+                setGallery([]);
                 setPackSizes([{ weight: '', price: '' }]);
             };
 
@@ -427,7 +427,7 @@
             const handleSubmit = (e) => {
                 e.preventDefault();
                 const filteredSizes = packSizes.filter(s => s.weight && s.price);
-                const galleryList = galleryStr ? galleryStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+                const galleryList = gallery;
                 
                 const updatedProduct = {
                     id: editingProduct ? editingProduct.id : Date.now(),
@@ -606,14 +606,51 @@
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Primary Image Source (URL or Base64)</label>
-                                            <input 
-                                                type="text" 
-                                                value={image}
-                                                onChange={(e) => setImage(e.target.value)}
-                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
-                                                placeholder="Image filename or base64 data URL"
-                                            />
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Primary Image</label>
+                                            {image ? (
+                                                <div className="relative w-32 h-40 border border-gray-200 rounded-lg overflow-hidden group">
+                                                    <img src={image} className="w-full h-full object-contain" />
+                                                    <button 
+                                                        type="button"
+                                                        onClick={() => setImage('')}
+                                                        className="absolute inset-0 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center font-bold text-xs"
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div 
+                                                    onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add('border-brand-maroon'); }}
+                                                    onDragLeave={(e) => { e.preventDefault(); e.currentTarget.classList.remove('border-brand-maroon'); }}
+                                                    onDrop={(e) => {
+                                                        e.preventDefault();
+                                                        e.currentTarget.classList.remove('border-brand-maroon');
+                                                        const file = e.dataTransfer.files[0];
+                                                        if (file) {
+                                                            const reader = new FileReader();
+                                                            reader.onloadend = () => setImage(reader.result);
+                                                            reader.readAsDataURL(file);
+                                                        }
+                                                    }}
+                                                    className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-brand-maroon transition-colors cursor-pointer relative"
+                                                >
+                                                    <input 
+                                                        type="file" 
+                                                        accept="image/*"
+                                                        onChange={(e) => {
+                                                            const file = e.target.files[0];
+                                                            if (file) {
+                                                                const reader = new FileReader();
+                                                                reader.onloadend = () => setImage(reader.result);
+                                                                reader.readAsDataURL(file);
+                                                            }
+                                                        }}
+                                                        className="absolute inset-0 opacity-0 cursor-pointer"
+                                                    />
+                                                    <p className="text-sm text-brand-gray">Drag & drop image here or <span className="text-brand-maroon font-semibold">browse</span></p>
+                                                    <p className="text-xs text-brand-gray/60 mt-1">Supports JPG, PNG (Max 5MB)</p>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 
@@ -630,14 +667,52 @@
                                     </div>
 
                                     <div>
-                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Gallery Image Names (Comma Separated)</label>
-                                        <input 
-                                            type="text" 
-                                            value={galleryStr}
-                                            onChange={(e) => setGalleryStr(e.target.value)}
-                                            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
-                                            placeholder="e.g. catalog_page_3.jpg, catalog_page_4.jpg"
-                                        />
+                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Gallery Images</label>
+                                        <div className="flex flex-wrap gap-4 mb-4">
+                                            {gallery.map((img, idx) => (
+                                                <div key={idx} className="relative w-24 h-24 border border-gray-200 rounded-lg overflow-hidden group">
+                                                    <img src={img} className="w-full h-full object-contain" />
+                                                    <button 
+                                                        type="button"
+                                                        onClick={() => setGallery(gallery.filter((_, i) => i !== idx))}
+                                                        className="absolute inset-0 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center font-bold text-xs"
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div 
+                                            onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add('border-brand-maroon'); }}
+                                            onDragLeave={(e) => { e.preventDefault(); e.currentTarget.classList.remove('border-brand-maroon'); }}
+                                            onDrop={(e) => {
+                                                e.preventDefault();
+                                                e.currentTarget.classList.remove('border-brand-maroon');
+                                                const files = Array.from(e.dataTransfer.files);
+                                                files.forEach(file => {
+                                                    const reader = new FileReader();
+                                                    reader.onloadend = () => setGallery(prev => [...prev, reader.result]);
+                                                    reader.readAsDataURL(file);
+                                                });
+                                            }}
+                                            className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-brand-maroon transition-colors cursor-pointer relative"
+                                        >
+                                            <input 
+                                                type="file" 
+                                                accept="image/*"
+                                                multiple
+                                                onChange={(e) => {
+                                                    const files = Array.from(e.target.files);
+                                                    files.forEach(file => {
+                                                        const reader = new FileReader();
+                                                        reader.onloadend = () => setGallery(prev => [...prev, reader.result]);
+                                                        reader.readAsDataURL(file);
+                                                    });
+                                                }}
+                                                className="absolute inset-0 opacity-0 cursor-pointer"
+                                            />
+                                            <p className="text-sm text-brand-gray">Drag & drop gallery images here or <span className="text-brand-maroon font-semibold">browse</span> to upload multiple</p>
+                                        </div>
                                     </div>
 
                                     <div>

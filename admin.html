@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Perfumary | Premium Agarbatti & Incense Products</title>
-    <meta name="description" content="Explore Aditya Perfumary's range of quality agarbatti and fragrance products. Contact us for product enquiries, wholesale and bulk orders.">
+    <title>Aditya Perfumary | Admin Dashboard</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,12 +18,12 @@
                 extend: {
                     colors: {
                         brand: {
-                            ivory: '#FAF7F2',     // Warm background
-                            maroon: '#6A1E36',    // Deep red/burgundy accents
+                            ivory: '#FAF7F2',
+                            maroon: '#6A1E36',
                             maroonDark: '#4A1324',
-                            gold: '#C5A059',      // Subtle gold highlights
+                            gold: '#C5A059',
                             goldLight: '#E8D4A6',
-                            charcoal: '#2D2D2D',  // Typography
+                            charcoal: '#2D2D2D',
                             gray: '#8C8C8C',
                         }
                     },
@@ -34,59 +33,22 @@
                     },
                     boxShadow: {
                         'premium': '0 10px 30px -10px rgba(106, 30, 54, 0.1)',
-                        'premium-hover': '0 20px 40px -10px rgba(106, 30, 54, 0.2)',
                     }
                 }
             }
         }
     </script>
-    <!-- Custom CSS for animations and utilities -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #FAF7F2;
             color: #2D2D2D;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
         }
-        
         h1, h2, h3, h4, h5, h6, .font-heading {
             font-family: 'Playfair Display', serif;
         }
-        /* Subtle smoke animation for hero background */
-        @keyframes subtleDrift {
-            0% { transform: translateY(0) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-20px) scale(1.05); opacity: 0.5; }
-            100% { transform: translateY(0) scale(1); opacity: 0.3; }
-        }
-        .bg-smoke-pattern {
-            background-image: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.05) 0%, transparent 50%),
-                              radial-gradient(circle at 80% 20%, rgba(106, 30, 54, 0.03) 0%, transparent 40%);
-            animation: subtleDrift 15s ease-in-out infinite alternate;
-        }
-        /* Fade In Animation */
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Staggered delays */
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-        /* Hide scrollbar for clean horizontal scrolls */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
     </style>
+    
     <!-- React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -96,18 +58,8 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect } = React;
-        // --- COMPANY DATA ---
-        const COMPANY_INFO = {
-            name: "ADITYA PERFUMARY",
-            address: "Malegaon, Akola, Maharashtra – 444108, India",
-            phone: "9881646082",
-            phoneFormatted: "+91 988 164 6082",
-            whatsappMsg: "Hello Aditya Perfumary, I am interested in your agarbatti products. Please share your product catalogue and wholesale details."
-        };
-        const WHATSAPP_LINK = `https://wa.me/91${COMPANY_INFO.phone}?text=${encodeURIComponent(COMPANY_INFO.whatsappMsg)}`;
-        // --- PRODUCT DATA (REPLACE WITH DRIVE ASSETS) ---
-        // USER INSTRUCTION: Replace the 'image' URLs with the direct image links from your Google Drive.
-        // Update names, types, descriptions, and pack sizes based on your exact inventory.
+        
+        // Default product list in case local storage is empty
         const PRODUCT_DATA = [
             {
                 id: 1,
@@ -345,522 +297,420 @@
                 gallery: ["catalog_page_12.jpg"]
             }
         ];
-        // --- SVG ICONS ---
-        const Icons = {
-            Menu: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>,
-            Close: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>,
-            WhatsApp: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>,
-            Phone: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>,
-            MapPin: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>,
-            ArrowRight: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>,
-            CheckCircle: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>,
-            Leaf: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>,
-            Shield: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>,
-            Package: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>,
-            Truck: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-        };
-        const Button = ({ children, variant = 'primary', className = '', href = '', onClick, type="button" }) => {
-            const baseStyle = "inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-300 gap-2 text-sm uppercase tracking-wider";
-            const variants = {
-                primary: "bg-brand-maroon text-brand-ivory hover:bg-brand-maroonDark shadow-lg hover:shadow-xl",
-                outline: "border border-brand-maroon text-brand-maroon hover:bg-brand-maroon hover:text-brand-ivory",
-                whatsapp: "bg-[#25D366] text-white hover:bg-[#128C7E] shadow-lg hover:shadow-xl",
-                gold: "bg-brand-gold text-brand-charcoal hover:bg-opacity-80 shadow-lg"
+
+        const AdminLogin = ({ onLogin, onCancel }) => {
+            const [username, setUsername] = useState('');
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (username === 'ADITYA' && password === 'jayant@123') {
+                    onLogin();
+                } else {
+                    setError('Invalid Username or Password');
+                }
             };
-            const combinedClass = `${baseStyle} ${variants[variant]} ${className}`;
-            if (href) {
-                return (
-                    <a href={href} target={href.startsWith('http') ? "_blank" : "_self"} rel="noopener noreferrer" className={combinedClass} onClick={onClick}>
-                        {children}
-                    </a>
-                );
-            }
+
             return (
-                <button type={type} className={combinedClass} onClick={onClick}>
-                    {children}
-                </button>
-            );
-        };
-        const Navbar = ({ navigate, currentView, openCatalog }) => {
-            const [isScrolled, setIsScrolled] = useState(false);
-            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-            useEffect(() => {
-                const handleScroll = () => {
-                    setIsScrolled(window.scrollY > 20);
-                };
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-            const navLinks = [
-                { name: 'Home', id: 'home' },
-                { name: 'About', id: 'about' },
-                { name: 'Products', id: 'products' },
-                { name: 'Wholesale', id: 'wholesale' },
-                { name: 'Contact', id: 'contact' },
-            ];
-            const handleNav = (id) => {
-                navigate(id);
-                setIsMobileMenuOpen(false);
-            };
-            return (
-                <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-brand-ivory/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
-                    <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-                        
-                        {/* Logo */}
-                        <div 
-                            className="cursor-pointer flex flex-col items-start"
-                            onClick={() => handleNav('home')}
-                        >
-                            <span className="font-heading font-bold text-2xl md:text-3xl text-brand-maroon tracking-wider">ADITYA</span>
-                            <span className="font-body text-xs md:text-sm tracking-[0.3em] text-brand-charcoal">PERFUMARY</span>
+                <div className="min-h-screen bg-brand-ivory flex items-center justify-center py-12 px-4">
+                    <div className="w-full max-w-md bg-white rounded-3xl shadow-premium border border-brand-gold/20 p-8">
+                        <div className="text-center mb-8">
+                            <h2 className="font-heading text-3xl text-brand-maroon font-bold">Admin Login</h2>
+                            <p className="text-brand-gray text-sm">Access the Aditya Perfumary control panel</p>
                         </div>
-                        {/* Desktop Nav */}
-                        <div className="hidden md:flex items-center space-x-8">
-                            {navLinks.map((link) => (
+                        {error && (
+                            <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg border border-red-200 mb-6 font-medium text-center">
+                                {error}
+                            </div>
+                        )}
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label className="block text-sm font-semibold text-brand-charcoal mb-2">Username</label>
+                                <input 
+                                    type="text" 
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none transition-colors text-sm"
+                                    required
+                                    placeholder="Enter username"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-brand-charcoal mb-2">Password</label>
+                                <input 
+                                    type="password" 
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none transition-colors text-sm"
+                                    required
+                                    placeholder="Enter password"
+                                />
+                            </div>
+                            <div className="flex gap-4 pt-2">
                                 <button 
-                                    key={link.id} 
-                                    onClick={() => handleNav(link.id)}
-                                    className={`text-sm uppercase tracking-widest transition-colors duration-300 ${currentView === link.id ? 'text-brand-maroon font-semibold border-b-2 border-brand-maroon' : 'text-brand-charcoal hover:text-brand-maroon'}`}
+                                    type="submit" 
+                                    className="w-full py-3 bg-brand-maroon text-brand-ivory rounded-full text-sm font-medium uppercase tracking-wider hover:bg-brand-maroonDark transition-colors shadow-md"
                                 >
-                                    {link.name}
+                                    Login
                                 </button>
-                            ))}
-                            <button 
-                                onClick={() => openCatalog(1)}
-                                className="text-sm uppercase tracking-widest text-brand-gold hover:text-brand-maroon transition-colors font-semibold"
-                            >
-                                View Catalog
-                            </button>
-                            <Button variant="whatsapp" href={WHATSAPP_LINK} className="!py-2 !px-4 !text-xs">
-                                <Icons.WhatsApp /> Enquire Now
-                            </Button>
-                        </div>
-                        {/* Mobile Toggle */}
-                        <button className="md:hidden text-brand-charcoal" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                            {isMobileMenuOpen ? <Icons.Close /> : <Icons.Menu />}
-                        </button>
-                    </div>
-                    {/* Mobile Menu */}
-                    {isMobileMenuOpen && (
-                        <div className="md:hidden absolute top-full left-0 w-full bg-brand-ivory shadow-lg border-t border-brand-gold/20 flex flex-col items-center py-6 space-y-6 fade-in">
-                            {navLinks.map((link) => (
                                 <button 
-                                    key={link.id} 
-                                    onClick={() => handleNav(link.id)}
-                                    className={`text-base uppercase tracking-widest ${currentView === link.id ? 'text-brand-maroon font-bold' : 'text-brand-charcoal'}`}
+                                    type="button" 
+                                    onClick={onCancel}
+                                    className="w-full py-3 border border-brand-maroon text-brand-maroon rounded-full text-sm font-medium uppercase tracking-wider hover:bg-brand-ivory transition-colors"
                                 >
-                                    {link.name}
+                                    Go to Site
                                 </button>
-                            ))}
-                            <button 
-                                onClick={() => { setIsMobileMenuOpen(false); openCatalog(1); }}
-                                className="text-base uppercase tracking-widest text-brand-gold font-bold"
-                            >
-                                View Catalog
-                            </button>
-                            <Button variant="whatsapp" href={WHATSAPP_LINK} className="w-3/4">
-                                <Icons.WhatsApp /> Enquire Now
-                            </Button>
-                        </div>
-                    )}
-                </nav>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             );
         };
-        const Hero = ({ navigate, openCatalog }) => (
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-ivory pt-20">
-                {/* Decorative Elements */}
-                <div className="absolute inset-0 bg-smoke-pattern pointer-events-none"></div>
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-maroon/5 rounded-full blur-3xl"></div>
-                <div className="container mx-auto px-4 text-center z-10 fade-in">
-                    <span className="inline-block py-1 px-3 rounded-full border border-brand-gold text-brand-gold text-xs font-semibold tracking-widest uppercase mb-6">
-                        Premium Indian Fragrances
-                    </span>
-                    <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl text-brand-maroon mb-6 leading-tight">
-                        The Essence of <br />
-                        <span className="text-brand-charcoal">Pure Devotion</span>
-                    </h1>
-                    <p className="max-w-2xl mx-auto text-brand-gray text-lg md:text-xl mb-10 font-light leading-relaxed">
-                        Experience the finest agarbatti and incense products crafted with traditional Indian values, bringing peace, purity, and a premium fragrance to your spaces.
-                    </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button onClick={() => navigate('products')}>
-                            Explore Products <Icons.ArrowRight />
-                        </Button>
-                        <Button variant="outline" onClick={() => openCatalog(1)}>
-                            View Catalog PDF
-                        </Button>
-                        <Button variant="outline" onClick={() => navigate('wholesale')}>
-                            Bulk & Wholesale
-                        </Button>
-                    </div>
-                </div>
-            </section>
-        );
-        const AboutPreview = ({ navigate }) => (
-            <section className="py-24 bg-white relative">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-col md:flex-row items-center gap-16">
-                        <div className="w-full md:w-1/2 relative fade-in">
-                            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-premium">
-                                <img src="about_woman.png" alt="Aditya Perfumary Tradition" className="w-full h-full object-cover" />
-                            </div>
-                            <div className="absolute -bottom-10 -right-10 bg-brand-maroon text-brand-ivory p-8 rounded-xl shadow-xl hidden md:block">
-                                <h4 className="font-heading text-4xl mb-2">1986</h4>
-                                <p className="text-sm uppercase tracking-wider font-light">Established</p>
-                            </div>
-                        </div>
-                        <div className="w-full md:w-1/2 fade-in delay-200">
-                            <h2 className="font-heading text-4xl md:text-5xl text-brand-maroon mb-6">A Legacy of Fragrance & Trust</h2>
-                            <p className="text-brand-charcoal/80 mb-6 leading-relaxed">
-                                Marketed & Packed by <strong>Aditya Perfumary</strong>, our products originate from Flourish Fragrance, established in 1986. Under visionary leadership, we have built a strong reputation based on quality, innovation, and customer satisfaction.
-                            </p>
-                            <p className="text-brand-charcoal/80 mb-8 leading-relaxed">
-                                Every incense stick is manufactured using carefully selected raw materials and premium fragrances to ensure a long-lasting aromatic experience. Our extensive range is thoughtfully developed for daily worship, meditation, and creating a refreshing atmosphere.
-                            </p>
-                            <div className="grid grid-cols-2 gap-6 mb-8">
-                                <div className="flex items-start gap-3">
-                                    <div className="text-brand-gold mt-1"><Icons.Leaf /></div>
-                                    <div>
-                                        <h4 className="font-bold text-brand-charcoal">Uncompromising Quality</h4>
-                                        <p className="text-sm text-brand-gray">Superior quality, consistency, and lasting performance.</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <div className="text-brand-gold mt-1"><Icons.Shield /></div>
-                                    <div>
-                                        <h4 className="font-bold text-brand-charcoal">Ethical Practices</h4>
-                                        <p className="text-sm text-brand-gray">Integrity, long-term relationships, and no child labor.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <Button variant="outline" onClick={() => navigate('about')}>Read Our Full Story</Button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-        const ProductCard = ({ product, onView }) => (
-            <div className="bg-brand-ivory rounded-2xl overflow-hidden shadow-md hover:shadow-premium-hover transition-all duration-300 group flex flex-col h-full border border-transparent hover:border-brand-gold/30">
-                <div className="relative h-64 overflow-hidden bg-white flex items-center justify-center p-4">
-                    <img 
-                        src={product.image} 
-                        alt={product.name} 
-                        className="max-w-full max-h-full object-contain transform group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-4 left-4 bg-brand-maroon text-brand-ivory text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        {product.type}
-                    </div>
-                </div>
-                <div className="p-6 flex-grow flex flex-col">
-                    <h3 className="font-heading text-xl text-brand-maroon font-semibold mb-2 line-clamp-1">{product.name}</h3>
-                    
-                    {/* Added Net Wt and MRP here */}
-                    {product.packSizes && product.packSizes.length > 0 && (
-                        <div className="mb-2 flex items-center flex-wrap gap-2">
-                            <span className="bg-brand-maroon/10 text-brand-maroon text-xs font-bold px-2 py-1 rounded">Net Wt: {product.packSizes[0].weight}</span>
-                            <span className="text-brand-charcoal font-bold text-sm">M.R.P: ₹{product.packSizes[0].price}</span>
-                            {product.packSizes.length > 1 && <span className="text-brand-gray text-xs">(Multiple sizes)</span>}
-                        </div>
-                    )}
-                    {product.fragrance && (
-                        <p className="text-brand-gold text-sm font-medium mb-3">Note: {product.fragrance}</p>
-                    )}
-                    <p className="text-brand-charcoal/70 text-sm mb-6 line-clamp-2 flex-grow">{product.description}</p>
-                    
-                    <div className="flex gap-2 mt-auto">
-                        <Button className="w-full !px-2 !py-2 text-xs" onClick={() => onView(product)}>
-                            View Details
-                        </Button>
-                    </div>
-                </div>
-            </div>
-        );
-        const ProductSection = ({ onViewProduct, products }) => {
-            const [filter, setFilter] = useState('All');
-            const categories = ['All', ...new Set(products.map(p => p.type))];
-            const filteredProducts = filter === 'All' 
-                ? products 
-                : products.filter(p => p.type === filter);
-            return (
-                <section className="py-24 bg-brand-ivory" id="products">
-                    <div className="container mx-auto px-4">
-                        <div className="text-center mb-16 fade-in">
-                            <h2 className="font-heading text-4xl md:text-5xl text-brand-maroon mb-4">Our Premium Collection</h2>
-                            <p className="text-brand-gray max-w-2xl mx-auto">Discover our range of meticulously crafted agarbatti and fragrance products, designed to elevate your senses.</p>
-                        </div>
-                        {/* Filters */}
-                        <div className="flex flex-wrap justify-center gap-4 mb-12 fade-in delay-100">
-                            {categories.map(cat => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setFilter(cat)}
-                                    className={`px-5 py-2 rounded-full text-sm font-medium transition-colors border ${
-                                        filter === cat 
-                                            ? 'bg-brand-maroon text-brand-ivory border-brand-maroon' 
-                                            : 'bg-white text-brand-charcoal border-gray-200 hover:border-brand-maroon hover:text-brand-maroon'
-                                    }`}
-                                >
-                                    {cat}
-                                </button>
-                            ))}
-                        </div>
-                        {/* Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 fade-in delay-200">
-                            {filteredProducts.map((product) => (
-                                <ProductCard key={product.id} product={product} onView={onViewProduct} />
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-        const ProductDetailView = ({ product, onBack }) => {
-            if (!product) return null;
+
+        const AdminDashboard = ({ products, onSave, onLogout }) => {
+            const [activeTab, setActiveTab] = useState('list');
+            const [editingProduct, setEditingProduct] = useState(null);
             
-            const [mainImage, setMainImage] = useState(product.image);
-            const allImages = [product.image, ...(product.gallery || [])];
+            // Form states
+            const [name, setName] = useState('');
+            const [type, setType] = useState('Premium Incense Sticks');
+            const [description, setDescription] = useState('');
+            const [fragrance, setFragrance] = useState('');
+            const [image, setImage] = useState('');
+            const [galleryStr, setGalleryStr] = useState('');
+            const [packSizes, setPackSizes] = useState([{ weight: '', price: '' }]);
+
+            // Initialize form on edit
+            useEffect(() => {
+                if (editingProduct) {
+                    setName(editingProduct.name || '');
+                    setType(editingProduct.type || 'Premium Incense Sticks');
+                    setDescription(editingProduct.description || '');
+                    setFragrance(editingProduct.fragrance || '');
+                    setImage(editingProduct.image || '');
+                    setGalleryStr((editingProduct.gallery || []).join(', '));
+                    setPackSizes(editingProduct.packSizes && editingProduct.packSizes.length > 0 
+                        ? editingProduct.packSizes 
+                        : [{ weight: '', price: '' }]
+                    );
+                    setActiveTab('edit');
+                } else {
+                    resetForm();
+                }
+            }, [editingProduct]);
+
+            const resetForm = () => {
+                setName('');
+                setType('Premium Incense Sticks');
+                setDescription('');
+                setFragrance('');
+                setImage('');
+                setGalleryStr('');
+                setPackSizes([{ weight: '', price: '' }]);
+            };
+
+            const handleAddSizeRow = () => {
+                setPackSizes([...packSizes, { weight: '', price: '' }]);
+            };
+
+            const handleRemoveSizeRow = (idx) => {
+                setPackSizes(packSizes.filter((_, i) => i !== idx));
+            };
+
+            const handleSizeChange = (idx, field, value) => {
+                const newSizes = [...packSizes];
+                newSizes[idx][field] = value;
+                setPackSizes(newSizes);
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const filteredSizes = packSizes.filter(s => s.weight && s.price);
+                const galleryList = galleryStr ? galleryStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+                
+                const updatedProduct = {
+                    id: editingProduct ? editingProduct.id : Date.now(),
+                    name,
+                    type,
+                    description,
+                    fragrance,
+                    image: image || 'https://placehold.co/600x800/FAF7F2/6A1E36?text=Aditya+Perfumary',
+                    gallery: galleryList,
+                    packSizes: filteredSizes
+                };
+
+                let newProductsList;
+                if (editingProduct) {
+                    newProductsList = products.map(p => p.id === editingProduct.id ? updatedProduct : p);
+                    setEditingProduct(null);
+                } else {
+                    newProductsList = [...products, updatedProduct];
+                }
+
+                onSave(newProductsList);
+                resetForm();
+                setActiveTab('list');
+                alert(editingProduct ? 'Product updated successfully!' : 'Product added successfully!');
+            };
+
+            const handleDelete = (id, prodName) => {
+                if (confirm(`Are you sure you want to delete "${prodName}"?`)) {
+                    const newProductsList = products.filter(p => p.id !== id);
+                    onSave(newProductsList);
+                }
+            };
+
             return (
-                <div className="min-h-screen bg-white pt-24 pb-16 fade-in">
-                    <div className="container mx-auto px-4">
-                        <button onClick={onBack} className="text-brand-gray hover:text-brand-maroon flex items-center gap-2 mb-8 transition-colors">
-                            <Icons.ArrowRight className="transform rotate-180" /> Back to Products
-                        </button>
-                        
-                        <div className="flex flex-col md:flex-row gap-12">
-                            {/* Images */}
-                            <div className="w-full md:w-1/2 flex flex-col gap-4">
-                                <div className="h-96 rounded-2xl overflow-hidden bg-white shadow-premium border border-gray-100 flex items-center justify-center p-8">
-                                    <img src={mainImage} alt={product.name} className="max-w-full max-h-full object-contain" />
-                                </div>
-                                {allImages.length > 1 && (
-                                    <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
-                                        {allImages.map((img, idx) => (
-                                            <button 
-                                                key={idx} 
-                                                onClick={() => setMainImage(img)}
-                                                className={`w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-colors bg-white flex items-center justify-center p-2 ${mainImage === img ? 'border-brand-maroon' : 'border-gray-200 opacity-70 hover:opacity-100'}`}
-                                            >
-                                                <img src={img} alt={`${product.name} view ${idx+1}`} className="max-w-full max-h-full object-contain" />
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+                <div className="min-h-screen bg-brand-ivory pt-8 pb-16">
+                    <div className="container mx-auto px-4 max-w-6xl">
+                        {/* Header */}
+                        <div className="bg-white rounded-2xl shadow-md border border-brand-gold/10 p-6 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h1 className="font-heading text-3xl text-brand-maroon font-bold">Admin Dashboard</h1>
+                                <p className="text-brand-gray text-sm">Welcome back, Aditya Perfumary Store Administrator</p>
                             </div>
-                            {/* Details */}
-                            <div className="w-full md:w-1/2 flex flex-col">
-                                <div className="mb-2 text-brand-gold text-sm font-bold uppercase tracking-wider">{product.type}</div>
-                                <h1 className="font-heading text-3xl md:text-4xl text-brand-maroon mb-4">{product.name}</h1>
-                                
-                                <p className="text-lg text-brand-charcoal/80 mb-6 leading-relaxed">
-                                    {product.description}
-                                </p>
-                                <div className="bg-brand-ivory rounded-xl p-6 mb-8 border border-brand-gold/20">
-                                    <h3 className="font-heading font-semibold text-xl mb-4 text-brand-charcoal">Available Options</h3>
-                                    
-                                    {product.packSizes && product.packSizes.length > 0 ? (
+                            <div className="flex gap-4 flex-wrap">
+                                <button 
+                                    onClick={() => { resetForm(); setEditingProduct(null); setActiveTab(activeTab === 'list' ? 'add' : 'list'); }}
+                                    className="px-5 py-2.5 bg-brand-maroon text-brand-ivory rounded-full text-sm font-semibold hover:bg-brand-maroonDark transition-colors"
+                                >
+                                    {activeTab === 'list' ? '+ Add New Product' : 'View Products List'}
+                                </button>
+                                <a 
+                                    href="index.html"
+                                    className="px-5 py-2.5 bg-brand-gold text-brand-charcoal rounded-full text-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center"
+                                >
+                                    Go to Live Site
+                                </a>
+                                <button 
+                                    onClick={onLogout}
+                                    className="px-5 py-2.5 border border-brand-maroon text-brand-maroon rounded-full text-sm font-semibold hover:bg-brand-ivory transition-colors"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Tabs content */}
+                        {activeTab === 'list' ? (
+                            <div className="bg-white rounded-2xl shadow-md border border-brand-gold/10 overflow-hidden">
+                                <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+                                    <h3 className="font-heading font-semibold text-xl text-brand-charcoal">All Products ({products.length})</h3>
+                                    <button 
+                                        onClick={() => {
+                                            if (confirm("Do you want to reset the database to the original default catalog?")) {
+                                                localStorage.removeItem('aditya_products');
+                                                window.location.reload();
+                                            }
+                                        }}
+                                        className="text-xs text-red-600 hover:underline font-bold"
+                                    >
+                                        Reset to Default Catalog
+                                    </button>
+                                </div>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-left border-collapse text-sm">
+                                        <thead>
+                                            <tr className="bg-brand-ivory text-brand-charcoal font-semibold border-b border-gray-200">
+                                                <th className="p-4">Image</th>
+                                                <th className="p-4">Name</th>
+                                                <th className="p-4">Category</th>
+                                                <th className="p-4">Fragrance Note</th>
+                                                <th className="p-4">Sizes & Prices</th>
+                                                <th className="p-4 text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-gray-100">
+                                            {products.map(p => (
+                                                <tr key={p.id} className="hover:bg-brand-ivory/30 transition-colors">
+                                                    <td className="p-4">
+                                                        <div className="w-12 h-16 rounded overflow-hidden bg-gray-50 border border-gray-100 flex items-center justify-center p-1">
+                                                            <img src={p.image} alt={p.name} className="max-w-full max-h-full object-contain" />
+                                                        </div>
+                                                    </td>
+                                                    <td className="p-4 font-semibold text-brand-charcoal">{p.name}</td>
+                                                    <td className="p-4 text-brand-gray">{p.type}</td>
+                                                    <td className="p-4 text-brand-gold font-medium">{p.fragrance || 'N/A'}</td>
+                                                    <td className="p-4">
+                                                        <div className="space-y-1">
+                                                            {(p.packSizes || []).map((sz, idx) => (
+                                                                <div key={idx} className="text-xs">
+                                                                    <span className="font-semibold">{sz.weight}:</span> ₹{sz.price}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </td>
+                                                    <td className="p-4 text-right space-x-3">
+                                                        <button 
+                                                            onClick={() => setEditingProduct(p)}
+                                                            className="text-brand-gold hover:underline font-semibold"
+                                                        >
+                                                            Edit
+                                                        </button>
+                                                        <button 
+                                                            onClick={() => handleDelete(p.id, p.name)}
+                                                            className="text-red-600 hover:underline font-semibold"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="bg-white rounded-2xl shadow-md border border-brand-gold/10 p-8 max-w-3xl mx-auto">
+                                <h3 className="font-heading font-semibold text-2xl text-brand-maroon mb-6">
+                                    {activeTab === 'edit' ? 'Edit Product Details' : 'Add New Product'}
+                                </h3>
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Product Name</label>
+                                            <input 
+                                                type="text" 
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                required
+                                                placeholder="e.g. Loban Dhoop"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Category / Type</label>
+                                            <select 
+                                                value={type}
+                                                onChange={(e) => setType(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm bg-white"
+                                            >
+                                                <option value="Dhoop Sticks">Dhoop Sticks</option>
+                                                <option value="Premium Incense Sticks">Premium Incense Sticks</option>
+                                                <option value="Metallic Sticks Jar/Pack">Metallic Sticks Jar/Pack</option>
+                                                <option value="Sambrani Cups">Sambrani Cups</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Fragrance Note</label>
+                                            <input 
+                                                type="text" 
+                                                value={fragrance}
+                                                onChange={(e) => setFragrance(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                placeholder="e.g. Pure Loban, Sandal & Spice"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Primary Image Source (URL or Base64)</label>
+                                            <input 
+                                                type="text" 
+                                                value={image}
+                                                onChange={(e) => setImage(e.target.value)}
+                                                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                placeholder="Image filename or base64 data URL"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Description</label>
+                                        <textarea 
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            rows="3"
+                                            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                            placeholder="Write product description..."
+                                            required
+                                        ></textarea>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2">Gallery Image Names (Comma Separated)</label>
+                                        <input 
+                                            type="text" 
+                                            value={galleryStr}
+                                            onChange={(e) => setGalleryStr(e.target.value)}
+                                            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                            placeholder="e.g. catalog_page_3.jpg, catalog_page_4.jpg"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase text-brand-charcoal mb-2 flex justify-between items-center">
+                                            <span>Pack Sizes & Prices</span>
+                                            <button 
+                                                type="button" 
+                                                onClick={handleAddSizeRow}
+                                                className="text-xs text-brand-maroon hover:underline font-bold"
+                                            >
+                                                + Add Size Row
+                                            </button>
+                                        </label>
                                         <div className="space-y-3">
-                                            {product.packSizes.map((pack, idx) => (
-                                                <div key={idx} className="flex justify-between items-center border-b border-gray-200 pb-2 last:border-0 last:pb-0">
-                                                    <span className="font-medium text-brand-charcoal">Net Wt: {pack.weight}</span>
-                                                    <span className="text-brand-maroon font-semibold">M.R.P: ₹{pack.price}</span>
+                                            {packSizes.map((sz, idx) => (
+                                                <div key={idx} className="flex gap-4 items-center">
+                                                    <input 
+                                                        type="text" 
+                                                        value={sz.weight}
+                                                        onChange={(e) => handleSizeChange(idx, 'weight', e.target.value)}
+                                                        className="w-1/2 px-4 py-2 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                        placeholder="e.g. 100gm, 1 Jar"
+                                                        required
+                                                    />
+                                                    <input 
+                                                        type="text" 
+                                                        value={sz.price}
+                                                        onChange={(e) => handleSizeChange(idx, 'price', e.target.value)}
+                                                        className="w-1/2 px-4 py-2 rounded-lg border border-gray-200 focus:border-brand-maroon focus:outline-none text-sm"
+                                                        placeholder="e.g. 45.00"
+                                                        required
+                                                    />
+                                                    {packSizes.length > 1 && (
+                                                        <button 
+                                                            type="button" 
+                                                            onClick={() => handleRemoveSizeRow(idx)}
+                                                            className="text-red-500 hover:text-red-700 font-bold"
+                                                        >
+                                                            Remove
+                                                        </button>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
-                                    ) : (
-                                        <p className="text-brand-gray">Contact us for pricing and sizes.</p>
-                                    )}
-                                    <div className="mt-6 pt-4 border-t border-gray-200 space-y-2">
-                                        {product.fragrance && (
-                                            <div className="flex justify-between">
-                                                <span className="text-brand-gray text-sm">Fragrance Note</span>
-                                                <span className="font-medium text-brand-charcoal text-sm">{product.fragrance}</span>
-                                            </div>
-                                        )}
-                                         <div className="flex justify-between">
-                                                <span className="text-brand-gray text-sm">Origin</span>
-                                                <span className="font-medium text-brand-charcoal text-sm">Made in India</span>
-                                        </div>
                                     </div>
-                                </div>
-                                <div className="mt-auto flex flex-col gap-4">
-                                    <Button 
-                                        variant="whatsapp" 
-                                        className="w-full py-4 text-lg"
-                                        href={`https://wa.me/91${COMPANY_INFO.phone}?text=Hello Aditya Perfumary, I want to enquire about ${encodeURIComponent(product.name)}.`}
-                                    >
-                                        <Icons.WhatsApp /> Enquire via WhatsApp
-                                    </Button>
-                                    <Button variant="outline" className="w-full py-4" onClick={() => window.location.href=`tel:${COMPANY_INFO.phone}`}>
-                                        <Icons.Phone /> Call Us Now
-                                    </Button>
-                                </div>
+
+                                    <div className="flex gap-4 pt-4 border-t border-gray-100">
+                                        <button 
+                                            type="submit"
+                                            className="px-6 py-3 bg-brand-maroon text-brand-ivory rounded-full text-sm font-semibold hover:bg-brand-maroonDark transition-colors shadow-md"
+                                        >
+                                            {activeTab === 'edit' ? 'Save Changes' : 'Create Product'}
+                                        </button>
+                                        <button 
+                                            type="button"
+                                            onClick={() => { setEditingProduct(null); setActiveTab('list'); }}
+                                            className="px-6 py-3 border border-gray-300 text-brand-charcoal rounded-full text-sm font-semibold hover:bg-gray-50 transition-colors"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             );
         };
-        const WhyChooseUs = () => {
-            const features = [
-                { icon: <Icons.Leaf />, title: "Premium Fragrance", desc: "Crafted to deliver a soothing, consistent aroma." },
-                { icon: <Icons.CheckCircle />, title: "Quality Assured", desc: "Strict quality control from manufacturing to packaging." },
-                { icon: <Icons.Package />, title: "Beautiful Packaging", desc: "Elegant boxes and zippers that preserve freshness." },
-                { icon: <Icons.Truck />, title: "Reliable Supply", desc: "Consistent availability for retail and bulk orders." }
-            ];
-            return (
-                <section className="py-20 bg-brand-maroon text-brand-ivory relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdib3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNHYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMC0zMFYwaC0ydjRoLTR2Mmg0djRoMnYtNGg0VjRoLTR6TTYgMzR2LTRIMHY0aC00djJoNHY0aDJ2LTRoNHYtMkY2em0wLTMwVjBIMHY0aC00djJoNHY0aDJ2LTRoNFY0SDZ6IiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L2c+PC9zdmc+')] opacity-20"></div>
-                    <div className="container mx-auto px-4 relative z-10">
-                        <div className="text-center mb-16 fade-in">
-                            <h2 className="font-heading text-4xl md:text-5xl text-brand-gold mb-4">Why Choose Aditya Perfumary</h2>
-                            <p className="max-w-2xl mx-auto text-brand-ivory/80">Experience the difference of a brand built on trust, devotion, and quality.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {features.map((feat, idx) => (
-                                <div key={idx} className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
-                                    <div className="inline-flex p-4 rounded-full bg-brand-gold/20 text-brand-gold mb-4">
-                                        {feat.icon}
-                                    </div>
-                                    <h3 className="font-heading text-xl font-semibold mb-2">{feat.title}</h3>
-                                    <p className="text-sm text-brand-ivory/70 leading-relaxed">{feat.desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-        const WholesaleSection = () => (
-            <section className="py-24 bg-white" id="wholesale">
-                <div className="container mx-auto px-4">
-                    <div className="bg-brand-ivory rounded-3xl overflow-hidden shadow-premium flex flex-col md:flex-row border border-brand-gold/20 fade-in">
-                        <div className="w-full md:w-5/12 bg-brand-maroonDark relative min-h-[300px]">
-                            {/* USER INSTRUCTION: Replace with a bulk order/factory/boxes image */}
-                            <img src="contact_background.jpg" alt="Wholesale Orders" className="w-full h-full object-cover opacity-80 mix-blend-overlay" />
-                            <div className="absolute inset-0 flex items-center justify-center p-8 text-center">
-                                <h3 className="font-heading text-3xl md:text-4xl text-brand-gold">Grow Your Business With Us</h3>
-                            </div>
-                        </div>
-                        <div className="w-full md:w-7/12 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-                            <span className="text-brand-maroon font-bold tracking-widest uppercase text-sm mb-2 block">Partner Network</span>
-                            <h2 className="font-heading text-3xl md:text-5xl text-brand-charcoal mb-6">Bulk & Wholesale Orders</h2>
-                            <p className="text-brand-gray mb-6 leading-relaxed">
-                                Aditya Perfumary is equipped to handle large-scale supply requirements for distributors, retailers, and bulk buyers across India. We offer competitive pricing, consistent quality, and reliable packaging for all our business partners.
-                            </p>
-                            <ul className="space-y-3 mb-8">
-                                <li className="flex items-center gap-3 text-brand-charcoal font-medium">
-                                    <Icons.CheckCircle /> Special pricing for Retailers & Distributors
-                                </li>
-                                <li className="flex items-center gap-3 text-brand-charcoal font-medium">
-                                    <Icons.CheckCircle /> Custom Master Packs available
-                                </li>
-                                <li className="flex items-center gap-3 text-brand-charcoal font-medium">
-                                    <Icons.CheckCircle /> Pan-India Supply capability
-                                </li>
-                            </ul>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <Button variant="primary" href={WHATSAPP_LINK}>
-                                    Become a Retailer
-                                </Button>
-                                <Button variant="outline" onClick={() => window.location.href=`tel:${COMPANY_INFO.phone}`}>
-                                    Call Sales Team
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-        const ContactSection = () => (
-            <section className="py-24 bg-brand-ivory relative" id="contact">
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-premium p-8 md:p-12 fade-in">
-                        <div className="text-center mb-12">
-                            <h2 className="font-heading text-4xl text-brand-maroon mb-4">Get In Touch</h2>
-                            <p className="text-brand-gray">We are here to assist you with product enquiries, orders, and business partnerships.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div className="flex flex-col items-center text-center p-6 bg-brand-ivory rounded-2xl transition-transform hover:-translate-y-1">
-                                <div className="text-brand-maroon mb-4 bg-white p-4 rounded-full shadow-sm"><Icons.MapPin /></div>
-                                <h4 className="font-bold text-brand-charcoal mb-2">Location</h4>
-                                <p className="text-sm text-brand-gray">{COMPANY_INFO.address}</p>
-                            </div>
-                            
-                            <div className="flex flex-col items-center text-center p-6 bg-brand-ivory rounded-2xl transition-transform hover:-translate-y-1">
-                                <div className="text-brand-maroon mb-4 bg-white p-4 rounded-full shadow-sm"><Icons.Phone /></div>
-                                <h4 className="font-bold text-brand-charcoal mb-2">Call Us</h4>
-                                <p className="text-sm text-brand-gray font-medium">{COMPANY_INFO.phoneFormatted}</p>
-                                <a href={`tel:${COMPANY_INFO.phone}`} className="text-brand-maroon text-xs mt-2 hover:underline">Tap to call</a>
-                            </div>
-                            <div className="flex flex-col items-center text-center p-6 bg-brand-ivory rounded-2xl transition-transform hover:-translate-y-1 border border-green-100">
-                                <div className="text-[#25D366] mb-4 bg-white p-4 rounded-full shadow-sm"><Icons.WhatsApp /></div>
-                                <h4 className="font-bold text-brand-charcoal mb-2">WhatsApp</h4>
-                                <p className="text-sm text-brand-gray">Instant replies for orders</p>
-                                <a href={WHATSAPP_LINK} target="_blank" className="text-[#25D366] text-xs mt-2 hover:underline font-bold">Message Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-        const Footer = ({ navigate }) => (
-            <footer className="bg-brand-charcoal text-brand-ivory pt-16 pb-8 border-t-4 border-brand-maroon">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                        <div className="md:col-span-2">
-                            <div className="mb-6">
-                                <span className="font-heading font-bold text-3xl text-white tracking-wider block">ADITYA</span>
-                                <span className="font-body text-sm tracking-[0.3em] text-brand-gold">PERFUMARY</span>
-                            </div>
-                            <p className="text-brand-ivory/70 max-w-sm text-sm leading-relaxed mb-6">
-                                Premium Indian agarbatti and fragrance products crafted with devotion, purity, and unmatched quality. Based in Malegaon, Akola.
-                            </p>
-                        </div>
-                        
-                        <div>
-                            <h4 className="font-heading text-lg text-brand-gold mb-6">Quick Links</h4>
-                            <ul className="space-y-3 text-sm text-brand-ivory/80">
-                                <li><button onClick={() => navigate('home')} className="hover:text-brand-gold transition-colors">Home</button></li>
-                                <li><button onClick={() => navigate('products')} className="hover:text-brand-gold transition-colors">Our Products</button></li>
-                                <li><button onClick={() => navigate('wholesale')} className="hover:text-brand-gold transition-colors">Wholesale Orders</button></li>
-                                <li><button onClick={() => navigate('contact')} className="hover:text-brand-gold transition-colors">Contact Us</button></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-heading text-lg text-brand-gold mb-6">Contact Info</h4>
-                            <ul className="space-y-3 text-sm text-brand-ivory/80">
-                                <li className="flex items-start gap-2">
-                                    <Icons.MapPin />
-                                    <span>{COMPANY_INFO.address}</span>
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <Icons.Phone />
-                                    <span>{COMPANY_INFO.phoneFormatted}</span>
-                                </li>
-                            </ul>
-                            <div className="mt-6">
-                                <Button variant="whatsapp" href={WHATSAPP_LINK} className="!py-2 !px-4 !text-xs w-full max-w-[200px]">
-                                    <Icons.WhatsApp /> Chat on WhatsApp
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="border-t border-white/10 pt-8 text-center text-xs text-brand-ivory/50 flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p>&copy; {new Date().getFullYear()} {COMPANY_INFO.name}. All rights reserved.</p>
-                        <p>Designed for premium fragrance experience.</p>
-                    </div>
-                </div>
-            </footer>
-        );
 
         const App = () => {
-            const [currentView, setCurrentView] = useState('home');
-            const [selectedProduct, setSelectedProduct] = useState(null);
-            const [showCatalog, setShowCatalog] = useState(false);
-            const [catalogPage, setCatalogPage] = useState(1);
-            
+            const [isLoggedIn, setIsLoggedIn] = useState(() => {
+                return sessionStorage.getItem('aditya_admin_logged_in') === 'true';
+            });
             const [products, setProducts] = useState(() => {
                 const saved = localStorage.getItem('aditya_products');
                 if (saved) {
@@ -870,162 +720,42 @@
                         console.error(e);
                     }
                 }
-                // Save default to localStorage for first load consistency
-                localStorage.setItem('aditya_products', JSON.stringify(PRODUCT_DATA));
                 return PRODUCT_DATA;
             });
-            
-            const openCatalog = (page = 1) => {
-                setCatalogPage(page);
-                setShowCatalog(true);
+
+            const handleSaveProducts = (newList) => {
+                setProducts(newList);
+                localStorage.setItem('aditya_products', JSON.stringify(newList));
             };
-            // Scroll to top on view change
-            useEffect(() => {
-                window.scrollTo(0, 0);
-            }, [currentView, selectedProduct]);
-            const navigate = (view) => {
-                setSelectedProduct(null);
-                setCurrentView(view);
+
+            const handleLogin = () => {
+                setIsLoggedIn(true);
+                sessionStorage.setItem('aditya_admin_logged_in', 'true');
             };
-            const viewProduct = (product) => {
-                setSelectedProduct(product);
-                setCurrentView('product-detail');
+
+            const handleLogout = () => {
+                setIsLoggedIn(false);
+                sessionStorage.removeItem('aditya_admin_logged_in');
             };
+
             return (
                 <div className="font-body text-brand-charcoal bg-brand-ivory min-h-screen">
-                    <Navbar navigate={navigate} currentView={currentView} openCatalog={openCatalog} />
-                    
-                    <main>
-
-                        {currentView === 'home' && (
-                            <>
-                                <Hero navigate={navigate} openCatalog={openCatalog} />
-                                <AboutPreview navigate={navigate} />
-                                <ProductSection onViewProduct={viewProduct} products={products} />
-                                <WhyChooseUs />
-                                <WholesaleSection />
-                                <ContactSection />
-                            </>
-                        )}
-                        {currentView === 'about' && (
-                            <>
-                                <div className="pt-32 pb-16 bg-white text-center">
-                                    <h1 className="font-heading text-5xl text-brand-maroon mb-6">About Us</h1>
-                                    <p className="max-w-2xl mx-auto text-brand-gray px-4">The story of devotion, fragrance, and uncompromising quality.</p>
-                                </div>
-                                <section className="py-12 bg-brand-ivory">
-                                    <div className="container mx-auto px-4 max-w-4xl fade-in">
-                                         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-premium mb-12">
-                                            <h3 className="font-heading text-2xl text-brand-maroon mb-4 text-center">Leading Manufacturer & Exporter of Premium Perfumed Incense Sticks</h3>
-                                            <div className="space-y-4 text-brand-charcoal/80 leading-relaxed text-justify">
-                                                <p>Flourish Fragrance, established in 1986, is a trusted name in the manufacturing and export of premium perfumed incense sticks. Under the visionary leadership of Mr. Jagdish Choudhary, the company has built a strong reputation based on quality, innovation, and customer satisfaction. With nearly four decades of experience, we continue to deliver products that reflect excellence, purity, and craftsmanship.</p>
-                                                
-                                                <p>Every incense stick is manufactured using carefully selected raw materials, advanced production techniques, and premium fragrances to ensure a long-lasting and pleasant aromatic experience. Our commitment to uncompromising quality has earned us the trust of customers across India and international markets.</p>
-                                                
-                                                <p>Our extensive range of fragrances is thoughtfully developed for daily worship, meditation, spiritual practices, relaxation, and creating a refreshing atmosphere at homes, workplaces, and sacred spaces. Each fragrance is meticulously crafted and thoroughly tested by experienced professionals to ensure superior quality, consistency, and lasting performance.</p>
-                                                
-                                                <p>Driven by changing market trends and evolving customer preferences, we continuously invest in modern manufacturing technologies, innovative product development, and advanced fragrance retention techniques. Our dedicated team of experts works relentlessly to introduce unique and high-quality products that meet global standards and exceed customer expectations.</p>
-                                                
-                                                <p>At Flourish Fragrance, we believe that success is built on integrity, ethical business practices, and long-term relationships. We value our employees, encourage continuous growth, and strictly prohibit child labor. Our unwavering commitment to quality, trust, and customer satisfaction remains the foundation of our success.</p>
-                                            </div>
-                                            <div className="mt-8 text-center border-t border-brand-gold/20 pt-6">
-                                                <p className="text-sm text-brand-gray uppercase tracking-widest mb-1">Marketed & Packed By:</p>
-                                                <p className="font-heading text-xl text-brand-maroon font-bold">Aditya Perfumary</p>
-                                                <p className="text-sm text-brand-charcoal">Malegaon, Akola, Maharashtra - 444108, India</p>
-                                            </div>
-                                         </div>
-                                    </div>
-                                </section>
-                                <WhyChooseUs />
-                            </>
-                        )}
-                        {currentView === 'products' && (
-                            <div className="pt-20">
-                                <ProductSection onViewProduct={viewProduct} products={products} />
-                            </div>
-                        )}
-                        {currentView === 'wholesale' && (
-                            <div className="pt-20">
-                                <WholesaleSection />
-                                <ContactSection />
-                            </div>
-                        )}
-                        {currentView === 'contact' && (
-                            <div className="pt-20">
-                                <ContactSection />
-                            </div>
-                        )}
-                        {currentView === 'product-detail' && (
-                            <ProductDetailView 
-                                product={selectedProduct} 
-                                onBack={() => {
-                                    setSelectedProduct(null);
-                                    // simple history fallback logic
-                                    setCurrentView('products');
-                                }} 
-                            />
-                        )}
-                    </main>
-                    <Footer navigate={navigate} />
-                    
-                    {/* Catalog Lightbox Overlay */}
-                    {showCatalog && (
-                        <div className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 select-none">
-                            {/* Header */}
-                            <div className="absolute top-4 left-4 right-4 flex justify-between items-center text-white">
-                                <span className="font-heading text-xl md:text-2xl text-brand-gold font-bold">Catalog Page {catalogPage} of 14</span>
-                                <button 
-                                    onClick={() => setShowCatalog(false)}
-                                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
-                                    aria-label="Close Catalog"
-                                >
-                                    <Icons.Close />
-                                </button>
-                            </div>
-                            
-                            {/* Main Image View */}
-                            <div className="w-full max-w-4xl max-h-[80vh] flex items-center justify-center relative">
-                                {/* Prev Button */}
-                                <button 
-                                    onClick={() => setCatalogPage(prev => Math.max(1, prev - 1))}
-                                    disabled={catalogPage === 1}
-                                    className={`absolute left-0 p-3 rounded-full bg-white/10 text-white transition-colors z-10 ${catalogPage === 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/25'}`}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform rotate-180"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                                </button>
-                                
-                                <img 
-                                    src={`catalog_page_${catalogPage}.jpg`} 
-                                    alt={`Catalog Page ${catalogPage}`} 
-                                    className="max-w-[85%] max-h-[75vh] object-contain rounded-lg shadow-2xl border border-white/10"
-                                />
-                                
-                                {/* Next Button */}
-                                <button 
-                                    onClick={() => setCatalogPage(prev => Math.min(14, prev + 1))}
-                                    disabled={catalogPage === 14}
-                                    className={`absolute right-0 p-3 rounded-full bg-white/10 text-white transition-colors z-10 ${catalogPage === 14 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/25'}`}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                                </button>
-                            </div>
-                            
-                            {/* Indicators */}
-                            <div className="absolute bottom-4 flex gap-2 overflow-x-auto max-w-[90%] pb-2 no-scrollbar">
-                                {Array.from({ length: 14 }, (_, idx) => (
-                                    <button 
-                                        key={idx}
-                                        onClick={() => setCatalogPage(idx + 1)}
-                                        className={`w-3 h-3 rounded-full transition-colors flex-shrink-0 ${catalogPage === idx + 1 ? 'bg-brand-gold' : 'bg-white/30 hover:bg-white/50'}`}
-                                        aria-label={`Go to page ${idx + 1}`}
-                                    ></button>
-                                ))}
-                            </div>
-                        </div>
+                    {!isLoggedIn ? (
+                        <AdminLogin 
+                            onLogin={handleLogin} 
+                            onCancel={() => window.location.href = 'index.html'} 
+                        />
+                    ) : (
+                        <AdminDashboard 
+                            products={products} 
+                            onSave={handleSaveProducts} 
+                            onLogout={handleLogout} 
+                        />
                     )}
                 </div>
             );
         };
+
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
